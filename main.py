@@ -143,11 +143,7 @@ def calculate_event_stats(events):
         payload = event.get("payload", {})
 
         if event_type == "PushEvent":
-            commits = payload.get("commits")
-            if commits is not None:
-                total_commits += len(commits)
-            else:
-                total_commits += payload.get("distinct_size", payload.get("size", 1))
+            total_commits += payload.get("size", 0)
 
         elif event_type == "PullRequestEvent":
             action = payload.get("action")
